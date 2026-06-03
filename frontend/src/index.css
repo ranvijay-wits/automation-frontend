@@ -1,17 +1,47 @@
+@import "./styles/theme.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;  */
-    --font-family-default: "Inter", sans-serif;
+    --font-family-default: "Inter", system-ui, sans-serif;
     --font-family-code: "Fira Code", monospace;
-    line-height: 1.45;
-    font-weight: 400;
 
-    color-scheme: light dark;
-    color: rgba(7, 7, 7, 0.87);
-    background-color: #f2f2f2;
+    /* Figma color tokens — see src/styles/tokens/colors.js */
+    --color-neutral-0: #ffffff;
+    --color-neutral-10: #fafafb;
+    --color-neutral-20: #f3f4f7;
+    --color-neutral-30: #e4e7eb;
+    --color-neutral-40: #cbd2d9;
+    --color-neutral-50: #9aa5b1;
+    --color-neutral-60: #7b8794;
+    --color-neutral-70: #616e7c;
+    --color-neutral-80: #52606d;
+    --color-neutral-90: #3e4c59;
+    --color-neutral-100: #323f4b;
+    --color-neutral-300: #101820;
+    --color-primary: #0084c7;
+    --color-primary-hover: #0076b3;
+    --color-primary-light: #e6f2ff;
+    --color-primary-light-active: #b8d6f2;
+    --color-primary-dark: #005885;
+    --color-primary-darker: #002d45;
+    --color-text: #101820;
+    --color-text-muted: #616e7c;
+    --color-background: #f3f4f7;
+    --color-border: #cbd2d9;
+    --color-focus-ring: rgba(0, 132, 199, 0.5);
+    --color-surface: #ffffff;
+    --color-surface-muted: #fafafb;
+    --color-success: #27a627;
+    --color-alert: #f7c01a;
+    --color-error: #d9534f;
+
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--color-text);
+    background-color: var(--color-background);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -28,13 +58,8 @@ body {
     font-family: var(--font-family-default);
     min-height: 100vh;
     min-width: 100vw;
-    background-color: #f2f2f2;
-    /* background-image: radial-gradient(
-		circle,
-		rgba(0, 0, 0, 0.083) 1px,
-		transparent 1px
-	); */
-    background-size: 20px 20px; /* Adjust the dot spacing */
+    background-color: var(--color-background);
+    background-size: 20px 20px;
     background-position: center;
 }
 
@@ -45,7 +70,7 @@ pre {
 
 /* Ant Design Select custom styling */
 .antd-select .ant-select-selector {
-    border-color: #d1d5db !important;
+    border-color: var(--color-border) !important;
     border-radius: 0.375rem !important;
     padding: 0.375rem 0.75rem !important;
     min-height: 2.5rem !important;
@@ -53,13 +78,13 @@ pre {
 }
 
 .antd-select .ant-select-selector:hover {
-    border-color: #9ca3af !important;
+    border-color: var(--color-neutral-50) !important;
     background-color: transparent !important;
 }
 
 .antd-select.ant-select-focused .ant-select-selector {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 2px var(--color-focus-ring) !important;
     background-color: transparent !important;
 }
 
@@ -68,46 +93,45 @@ pre {
 }
 
 .antd-select .ant-select-selection-item {
-    background-color: #dbeafe !important;
-    border-color: #3b82f6 !important;
-    color: #1e40af !important;
+    background-color: var(--color-primary-light) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary-dark) !important;
 }
 
 .antd-select .ant-select-selection-item-remove {
-    color: #1e40af !important;
+    color: var(--color-primary-dark) !important;
 }
 
 .antd-select .ant-select-selection-item-remove:hover {
-    color: #1e3a8a !important;
+    color: var(--color-primary-darker) !important;
 }
 
 /* Ant Design Input custom styling */
 .antd-input {
     background-color: transparent !important;
-    border-color: #d1d5db !important;
+    border-color: var(--color-border) !important;
     border-radius: 0.375rem !important;
     padding: 0.375rem 0.75rem !important;
     min-height: 2.5rem !important;
 }
 
 .antd-input:hover {
-    border-color: #9ca3af !important;
+    border-color: var(--color-neutral-50) !important;
     background-color: transparent !important;
 }
 
 .antd-input:focus,
 .antd-input.ant-input-focused {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 2px var(--color-focus-ring) !important;
     background-color: transparent !important;
 }
 
 .antd-input.ant-input-disabled {
     background-color: transparent !important;
-    color: #6b7280 !important;
+    color: var(--color-text-muted) !important;
 }
 
-/* Ant Design TextArea custom styling */
 .antd-input.ant-input {
     background-color: transparent !important;
 }
@@ -116,7 +140,6 @@ pre {
     background-color: transparent !important;
 }
 
-/* Ant Design Password Input custom styling */
 .antd-input.ant-input-password {
     background-color: transparent !important;
 }
@@ -125,38 +148,37 @@ pre {
     background-color: transparent !important;
 }
 
-/* ── Global Scrollbar – Sky Blue Professional Theme ── */
+/* Global scrollbar — brand primary */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #e0f2fe; /* sky-100 */
+    background: var(--color-primary-light);
     border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #0ea5e9; /* sky-500 */
+    background: var(--color-primary);
     border-radius: 9999px;
-    border: 1px solid #bae6fd; /* sky-200 */
+    border: 1px solid var(--color-primary-light-active);
     transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0284c7; /* sky-600 */
+    background: var(--color-primary-hover);
 }
 
 ::-webkit-scrollbar-thumb:active {
-    background: #0369a1; /* sky-700 */
+    background: var(--color-primary-dark);
 }
 
 ::-webkit-scrollbar-corner {
-    background: #e0f2fe;
+    background: var(--color-primary-light);
 }
 
-/* Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #0ea5e9 #e0f2fe;
+    scrollbar-color: var(--color-primary) var(--color-primary-light);
 }

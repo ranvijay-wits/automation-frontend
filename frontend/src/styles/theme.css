@@ -1,0 +1,17 @@
+/**
+ * Semantic theme fallbacks before theme.ts runs (FOUC guard).
+ * Runtime updates via initTheme() / setTheme() from colors.js semanticTheme.
+ */
+
+:root {
+    --color-surface: #ffffff;
+    --color-surface-muted: #fafafb;
+    --color-success: #27a627;
+    --color-alert: #f7c01a;
+    --color-error: #d9534f;
+    color-scheme: light;
+}
+
+html.dark {
+    color-scheme: dark;
+}
