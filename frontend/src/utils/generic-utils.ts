@@ -265,9 +265,6 @@ export const openReportInNewTab = (decodedHtml: string, sessionId: string) => {
         const iframe = newTab.document.getElementById("reportFrame") as HTMLIFrameElement;
         if (!iframe) return;
 
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-        if (!iframeDoc) return;
-
         // Inject print optimization CSS to speed up browser's native PDF rendering engine
         // by removing heavy rendering properties during the print phase.
         const printOptimizationStyles = `
@@ -283,9 +280,17 @@ export const openReportInNewTab = (decodedHtml: string, sessionId: string) => {
             </style>
         `;
 
-        iframeDoc.open();
-        iframeDoc.write(printOptimizationStyles + decodedHtml);
-        iframeDoc.close();
+        // Use Blob URL instead of document.write for better performance on large HTML strings
+        const blob = new Blob([printOptimizationStyles + decodedHtml], {
+            type: "text/html;charset=utf-8",
+        });
+        const url = URL.createObjectURL(blob);
+
+        iframe.onload = () => {
+            URL.revokeObjectURL(url); // Clean up memory
+        };
+
+        iframe.src = url;
 
         // Step 4: Handle PDF download using native print
         const downloadBtn = newTab.document.getElementById("downloadPdfBtn") as HTMLButtonElement;
